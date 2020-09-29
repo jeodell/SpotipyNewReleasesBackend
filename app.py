@@ -15,8 +15,11 @@ from flask import (
     url_for,
     jsonify,
 )
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.secret_key = os.getenv('SECRET')
 
 scope = 'user-follow-read'
@@ -25,12 +28,14 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 @app.route('/api/get-user', methods=['GET'])
+@cross_origin()
 def get_user():
     user = sp.current_user()
     return user
 
 
 @app.route('/api/get-artists', methods=['GET'])
+@cross_origin()
 def get_artists():
     followed_artists = sp.current_user_followed_artists(limit=1)
 
@@ -55,6 +60,7 @@ def get_artists():
 
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def index():
     return "<h1>Spotipy New Releases Server</h1>"
 
