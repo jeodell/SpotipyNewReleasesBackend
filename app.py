@@ -25,21 +25,20 @@ app.secret_key = os.getenv('SECRET')
 scope = 'user-follow-read'
 spotipy_client_id = os.getenv('SPOTIPY_CLIENT_ID')
 spotipy_client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=spotipy_client_id,
-                                               client_secret=spotipy_client_secret, redirect_uri="http://localhost:8888/callback/", scope="user-follow-read"))
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
+    scope=scope))
 pp = pprint.PrettyPrinter(indent=4)
 
 
-@app.route('/api/get-user', methods=['GET'])
-@cross_origin()
+@ app.route('/api/get-user', methods=['GET'])
+@ cross_origin()
 def get_user():
     user = sp.current_user()
     return user
 
 
-@app.route('/api/get-artists', methods=['GET'])
-@cross_origin()
+@ app.route('/api/get-artists', methods=['GET'])
+@ cross_origin()
 def get_artists():
     followed_artists = sp.current_user_followed_artists(limit=1)
 
@@ -69,8 +68,8 @@ def get_artists():
     return artistsJson
 
 
-@app.route('/', methods=['GET'])
-@cross_origin()
+@ app.route('/', methods=['GET'])
+@ cross_origin()
 def index():
     return "<h1>Spotipy New Releases Server</h1>"
 
