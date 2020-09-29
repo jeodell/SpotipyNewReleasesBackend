@@ -18,8 +18,7 @@ from flask import (
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)
 app.secret_key = os.getenv('SECRET')
 
 scope = 'user-follow-read'
