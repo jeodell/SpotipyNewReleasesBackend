@@ -55,7 +55,13 @@ def get_artists():
         albumsAndSingles.extend(albumResults['items'])
         singlesResults = sp.artist_albums(item['id'], 'single', limit=10)
         albumsAndSingles.extend(singlesResults['items'])
-        item['albums'] = albumsAndSingles
+        seenAlbums = set()
+        uniqueAlbums = []
+        for obj in albumsAndSingles:
+            if obj['name'] not in seenAlbums:
+                uniqueAlbums.append(obj)
+                seenAlbums.add(obj['name'])
+        item['albums'] = uniqueAlbums
     return artistsJson
 
 
