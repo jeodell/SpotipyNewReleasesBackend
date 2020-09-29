@@ -23,7 +23,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.secret_key = os.getenv('SECRET')
 
 scope = 'user-follow-read'
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+spotipy_client_id = os.getenv('SPOTIPY_CLIENT_ID')
+spotipy_client_secret = os.getenv('SPOTIPY_CLIENT_SECRET')
+# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=spotipy_client_id,
+                                               client_secret=spotipy_client_secret, redirect_uri="http://localhost:8888/callback/", scope="user-follow-read"))
 pp = pprint.PrettyPrinter(indent=4)
 
 
