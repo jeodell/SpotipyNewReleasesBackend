@@ -30,14 +30,14 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 @ app.route('/api/get-user', methods=['GET'])
-@ cross_origin()
 def get_user():
     user = sp.current_user()
-    return user
+    response = jsonify(sp.current_user())
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @ app.route('/api/get-artists', methods=['GET'])
-@ cross_origin()
 def get_artists():
     followed_artists = sp.current_user_followed_artists(limit=1)
 
@@ -64,7 +64,9 @@ def get_artists():
                 uniqueAlbums.append(obj)
                 seenAlbums.add(obj['name'])
         item['albums'] = uniqueAlbums
-    return artistsJson
+    response = jsonify(artistsJson)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @ app.route('/', methods=['GET'])
