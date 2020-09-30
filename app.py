@@ -32,7 +32,8 @@ pp = pprint.PrettyPrinter(indent=4)
 def get_user():
     user = sp.current_user()
     response = jsonify(sp.current_user())
-    response.headers.add("Access-Control-Allow-Origin", '*')
+    response.headers.add("Access-Control-Allow-Origin",
+                         'https://jeodell.github.io')
     response.headers.add("Access-Control-Allow-Credentials", True)
     response.headers.add('Access-Control-Allow-Methods',
                          'GET,PUT,POST,DELETE,OPTIONS')
@@ -69,7 +70,8 @@ def get_artists():
                 seenAlbums.add(obj['name'])
         item['albums'] = uniqueAlbums
     response = jsonify(artistsJson)
-    response.headers.add("Access-Control-Allow-Origin", '*')
+    response.headers.add("Access-Control-Allow-Origin",
+                         'https://jeodell.github.io')
     response.headers.add("Access-Control-Allow-Credentials", True)
     response.headers.add('Access-Control-Allow-Methods',
                          'GET,PUT,POST,DELETE,OPTIONS')
