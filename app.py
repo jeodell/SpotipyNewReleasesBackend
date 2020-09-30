@@ -36,6 +36,7 @@ def get_user():
     user = sp.current_user()
     response = jsonify(sp.current_user())
     response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 
@@ -69,6 +70,7 @@ def get_artists():
         item['albums'] = uniqueAlbums
     response = jsonify(artistsJson)
     response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 
