@@ -15,7 +15,7 @@ from flask import (
     url_for,
     jsonify,
 )
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -30,16 +30,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 @ app.route('/api/get-user', methods=['GET'])
 def get_user():
-    user = sp.current_user()
-    response = jsonify(sp.current_user())
-    response.headers.add("Access-Control-Allow-Origin",
-                         'https://jeodell.github.io')
-    response.headers.add("Access-Control-Allow-Credentials", True)
-    response.headers.add('Access-Control-Allow-Methods',
-                         'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add("Access-Control-Allow-Headers",
-                         'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
-    return response
+    return sp.current_user()
 
 
 @ app.route('/api/get-artists', methods=['GET'])
@@ -69,15 +60,7 @@ def get_artists():
                 uniqueAlbums.append(obj)
                 seenAlbums.add(obj['name'])
         item['albums'] = uniqueAlbums
-    response = jsonify(artistsJson)
-    response.headers.add("Access-Control-Allow-Origin",
-                         'https://jeodell.github.io')
-    response.headers.add("Access-Control-Allow-Credentials", True)
-    response.headers.add('Access-Control-Allow-Methods',
-                         'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add("Access-Control-Allow-Headers",
-                         'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
-    return response
+    return artistsJson
 
 
 @ app.route('/', methods=['GET'])
