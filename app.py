@@ -20,6 +20,7 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 app.secret_key = os.getenv('SECRET')
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 scope = 'user-follow-read'
 spotipy_client_id = os.getenv('SPOTIPY_CLIENT_ID')
@@ -30,6 +31,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 @ app.route('/api/get-user', methods=['GET'])
+@cross_origin()
 def get_user():
     user = sp.current_user()
     response = jsonify(sp.current_user())
@@ -38,6 +40,7 @@ def get_user():
 
 
 @ app.route('/api/get-artists', methods=['GET'])
+@cross_origin()
 def get_artists():
     followed_artists = sp.current_user_followed_artists(limit=1)
 
