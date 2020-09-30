@@ -19,7 +19,6 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-app.secret_key = os.getenv('SECRET')
 
 scope = 'user-follow-read'
 spotipy_client_id = os.getenv('SPOTIPY_CLIENT_ID')
@@ -33,7 +32,12 @@ pp = pprint.PrettyPrinter(indent=4)
 def get_user():
     user = sp.current_user()
     response = jsonify(sp.current_user())
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Access-Control-Allow-Origin", '*')
+    response.headers.add("Access-Control-Allow-Credentials", True)
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add("Access-Control-Allow-Headers",
+                         'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
     return response
 
 
@@ -65,7 +69,12 @@ def get_artists():
                 seenAlbums.add(obj['name'])
         item['albums'] = uniqueAlbums
     response = jsonify(artistsJson)
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Access-Control-Allow-Origin", '*')
+    response.headers.add("Access-Control-Allow-Credentials", True)
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add("Access-Control-Allow-Headers",
+                         'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json')
     return response
 
 
