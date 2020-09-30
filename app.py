@@ -35,7 +35,6 @@ pp = pprint.PrettyPrinter(indent=4)
 def get_user():
     user = sp.current_user()
     response = jsonify(sp.current_user())
-    response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
@@ -69,7 +68,6 @@ def get_artists():
                 seenAlbums.add(obj['name'])
         item['albums'] = uniqueAlbums
     response = jsonify(artistsJson)
-    response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
