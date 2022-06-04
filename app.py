@@ -36,7 +36,7 @@ def get_artists():
             followed_artists = sp.next(followed_artists['artists'])
         else:
             followed_artists = None
-    for i, item in enumerate(artistsJson['artists']):
+    for item in artistsJson['artists']:
         albumsAndSingles = []
         albumResults = sp.artist_albums(item['id'], 'album', limit=10)
         albumsAndSingles.extend(albumResults['items'])
