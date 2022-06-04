@@ -1,20 +1,9 @@
 import os
-import time
-import sys
 import pprint
 import spotipy
-import spotipy.util as util
-from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
+from spotipy.oauth2 import SpotifyOAuth
 from datetime import datetime
-from flask import (
-    Flask,
-    flash,
-    render_template,
-    redirect,
-    request,
-    url_for,
-    jsonify,
-)
+from flask import Flask
 from flask_cors import CORS
 
 app = Flask(__name__)
